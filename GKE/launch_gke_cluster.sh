@@ -8,7 +8,7 @@ ZONE=$REGION-a
 
 CLUSTER_NAME=sysdig-training-cluster
 
-if ! [ -x "$(command -v gcloud)" ]; then
+if ! [ -x "$(command -v gccloud)" ]; then
   echo 'You must have Google CLoud CLI installed. See https://cloud.google.com/pubsub/docs/quickstart-cli ' >&2
   exit 1
 fi
@@ -61,3 +61,6 @@ echo ""
 
 echo "Your cluster is ready. You can access it at
 https://console.cloud.google.com/kubernetes/workload_/gcloud/$ZONE/$CLUSTER_NAME?project=$PROJECT_ID"
+echo ""
+echo "Once you're finished, remember to delete your cluser using the command 'gcloud container clusters delete $CLUSTER_NAME'"
+echo ""
