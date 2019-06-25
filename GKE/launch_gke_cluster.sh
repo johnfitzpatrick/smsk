@@ -8,7 +8,7 @@ ZONE=$REGION-a
 
 CLUSTER_NAME=sysdig-training-cluster
 
-if ! [ -x "$(which gcloud)" ]; then
+if ! [ -x "$(command -v gcloud)" ]; then
   echo 'You must have Google CLoud CLI installed. See https://cloud.google.com/pubsub/docs/quickstart-cli ' >&2
   exit 1
 fi
@@ -19,7 +19,7 @@ if [ "$(gcloud container clusters list)" ]; then
   exit 1
 fi
 
-if ! [ -x "$(which kubectl)" ]; then
+if ! [ -x "$(command -v kubectl)" ]; then
   echo 'You must have 'kubectl' installed. See https://kubernetes.io/docs/tasks/tools/install-kubectl/ ' >&2
   exit 1
 fi
@@ -30,9 +30,9 @@ gcloud projects list
 echo ""
 
 echo -n "Enter the PROJECT_ID for where you would like your Kubernetes cluster: "
-read PROJECT_ID
+read -r PROJECT_ID
 
-gcloud config set project $PROJECT_ID
+gcloud config set project "$PROJECT_ID"
 
 echo ""
 echo "Creating cluster '$CLUSTER_NAME' in project '$PROJECT_ID' and zone '$ZONE'"
