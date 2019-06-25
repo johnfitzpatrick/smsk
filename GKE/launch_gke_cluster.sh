@@ -1,11 +1,12 @@
 #!/bin/bash
 
-YOURNAME=jhnftzptrck
 REGION=us-central1
 ZONE=$REGION-a
+# YOURNAME=jhnftzptrck
 # CLUSTER_NAME=$YOURNAME-cluster
-CLUSTER_NAME=sysdig-training-cluster
 # source config
+
+CLUSTER_NAME=sysdig-training-cluster
 
 echo "Your Google cloud projects are: "
 echo ""
