@@ -6,7 +6,11 @@ ZONE=$REGION-a
 # CLUSTER_NAME=$YOURNAME-cluster
 # source config
 
-CLUSTER_NAME=sysdig-training-cluster
+# NUMBER_CLUSTERS=1
+BASE_NAME=sysdig-training-cluster
+
+echo -n "How many clusters would you like? "
+read -r NUMBER_CLUSTERS
 
 if ! [ -x "$(command -v gcloud)" ]; then
   echo 'You must have Google CLoud CLI installed. See https://cloud.google.com/pubsub/docs/quickstart-cli ' >&2
@@ -33,6 +37,12 @@ echo -n "Enter the PROJECT_ID for where you would like your Kubernetes cluster: 
 read -r PROJECT_ID
 
 gcloud config set project "$PROJECT_ID"
+
+
+for i in $(seq 1 $NUMBER_CLUSTERS); do
+  (
+  CLUSTER_NAME=$BASE_NAME-$i
+  echo "Creating Target $CLUSTER_NAME"
 
 echo ""
 echo "Creating cluster '$CLUSTER_NAME' in project '$PROJECT_ID' and zone '$ZONE'"
@@ -64,3 +74,6 @@ https://console.cloud.google.com/kubernetes/workload_/gcloud/$ZONE/$CLUSTER_NAME
 echo ""
 echo "Once you're finished, remember to delete your cluser using the command 'gcloud container clusters delete $CLUSTER_NAME'"
 echo ""
+
+) &
+done
